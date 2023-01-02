@@ -41,7 +41,7 @@ def ingredient_check(coffee):
         else:
             print("Sorry there is not enough " + ingredient + ".")
             return False
-    if count == 2:
+    if count == 2 or count == 3:
         if coins():
             for ingredient in ingredients_:
                 resources[ingredient] -= ingredients_[ingredient]
@@ -71,19 +71,18 @@ def coins():
 
 while True:
     coffee = input("What would you like? (espresso/latte/cappuccino) ")
-    count_ = 0
     if coffee == "report":
         for resource in resources:
-            if count_ == 0 or count_ == 1:
+            if resource == "water" or resource == "milk":
                 attrib = "ml"
-            if count_ == 2:
+            if resource == "coffee":
                 attrib = "gr"
-            if count_ == 3:
+            if resource == "money":
                 attrib = "$"
             print(resource + ": " + str(resources[resource]) + attrib)
-            count_ += 1
         input("\nPress Enter to continue...")
-    elif coffee == "off":
+    elif coffee == "off" or coffee == "exit":
+        print("Shutting down...")
         quit()
     elif coffee == "espresso" or coffee == "latte" or coffee == "cappuccino":
         ingredient_check(coffee)
